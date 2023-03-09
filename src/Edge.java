@@ -12,4 +12,10 @@ public class Edge extends GraphObject {
         return this.getName().equals(other.getName());
     }
 
+    public String toString() {
+        return    "Edge{" +
+                "name='" + this.getName() + '\'' +
+                ", weight=" + this.getWeight() +
+                '}';
+    }
 }

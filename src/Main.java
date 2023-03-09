@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
         MyGraph g = new MyGraph();
@@ -40,6 +42,13 @@ public class Main {
         g.insertEdge("O","P","21");
 
         g.print();
+        System.out.println("Edge between A and B is " + g.getEdge("A","B"));
+        System.out.println("Edge between K and P is " + g.getEdge("K","P"));
+        System.out.println("End Vertices of 1 are " + Arrays.toString(g.endVertices("1")));
+        System.out.println("End Vertices of 20 are " + Arrays.toString(g.endVertices("20")));
+        System.out.println("Opposite Vertex of A and 1 is " + g.opposite("A", "1"));
+        System.out.println("Opposite Vertex of G and 11 is " + g.opposite("G", "11"));
+
     }
 
 }
