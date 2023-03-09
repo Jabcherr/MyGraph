@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -12,6 +11,18 @@ public class MyGraph {
         numEdges = 0;
         numVerticies = 0;
         graph = new HashMap<>();
+    }
+
+    public String getEdge(String vertex1, String vertex2){
+        Vertex v1 = getVertexfromString(vertex1);
+        Vertex v2 = getVertexfromString(vertex2);
+        ArrayList<GraphPairing> gp = graph.get(v1);
+        for (GraphPairing g: gp){
+            if (g.getVertex() == v2){
+                return g.getEdge().getName();
+            }
+        }
+        return "Edge Does not Exist";
     }
 
     public void print(){
@@ -69,4 +80,76 @@ public class MyGraph {
         numEdges++;
     }
 
+    private Vertex getVertexfromString(String s){
+        Set<Vertex> vertices = graph.keySet();
+        for (Vertex v: vertices){
+            if (v.getName().equals(s))
+                return v;
+        }
+        return null;
+    }
+
+    private Edge getEdgefromString(String s){
+        Set<Vertex> vertices = graph.keySet();
+        for(Vertex v: vertices){
+            ArrayList<GraphPairing> gps = graph.get(v);
+            if (gps != null){
+                for (GraphPairing g: gps){
+                    Edge e = g.getEdge();
+                    if (e.getName().equals(s))
+                        return e;
+                }
+            }
+        }
+        return null;
+    }
+
+    public String opposite(String vertex, String edge){
+        Vertex v = getVertexfromString(vertex);
+        Edge e = getEdgefromString(edge);
+
+        ArrayList<GraphPairing> gps = graph.get(v);
+        for (GraphPairing g: gps){
+            if (g.getEdge() == e){
+                return g.getVertex().getName();
+            }
+        }
+        return null;
+    }
+
+    //Currently Working On
+    public int outDegree(String vertex){
+        Vertex v = getVertexfromString(vertex);
+
+        ArrayList<GraphPairing> gps = graph.get(v);
+        for (GraphPairing g: gps){
+
+        }
+        return 0;
+    }
+
+    //Skipping for now
+    public Set<String> vertecies(){
+        return null;
+    }
+
+    public String[] endVertices(String edge){
+        String[] vertices = new String[2];
+        Edge e = getEdgefromString(edge);
+
+        Set<Vertex> vertexList = graph.keySet();
+        ArrayList<String> string = new ArrayList<>();
+        for (Vertex v: vertexList){
+            ArrayList<GraphPairing> gps = graph.get(v);
+            for (GraphPairing g : gps){
+                if (g.getEdge() == e){
+                     string.add(g.getVertex().getName());
+                }
+            }
+        }
+        for (int i = 0; i < string.size(); i++)
+             vertices[i] = string.get(i);
+
+        return vertices;
+    }
 }
