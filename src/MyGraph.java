@@ -200,7 +200,7 @@ public class MyGraph {
         for (Vertex vert: vertices()){
             ArrayList<GraphPairing> gps = graph.get(v);
             for (GraphPairing g: gps){
-                if(g.getVertex() == vert){
+                if(g.getVertex() == v){
                     graph.remove(vert);
                 }
             }

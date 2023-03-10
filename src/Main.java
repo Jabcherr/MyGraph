@@ -52,8 +52,7 @@ public class Main {
         System.out.println("In Degree of G is " + g.inDegree("G"));
         System.out.println("Outgoing Edge(s) from F: " + g.outgoingEdges("F"));
         System.out.println("Incoming Edge(s) from I: " + g.incomingEdges("I"));
-        g.removeVertex("O");
-        System.out.println("End Vertices of 21 are " + Arrays.toString(g.endVertices("21")));
+
     }
 
 }
