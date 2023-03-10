@@ -48,7 +48,12 @@ public class Main {
         System.out.println("End Vertices of 20 are " + Arrays.toString(g.endVertices("20")));
         System.out.println("Opposite Vertex of A and 1 is " + g.opposite("A", "1"));
         System.out.println("Opposite Vertex of G and 11 is " + g.opposite("G", "11"));
-
+        System.out.println("Out Degree of B is " + g.outDegree("B"));
+        System.out.println("In Degree of G is " + g.inDegree("G"));
+        System.out.println("Outgoing Edge(s) from F: " + g.outgoingEdges("F"));
+        System.out.println("Incoming Edge(s) from I: " + g.incomingEdges("I"));
+        g.removeVertex("O");
+        System.out.println("End Vertices of 21 are " + Arrays.toString(g.endVertices("21")));
     }
 
 }

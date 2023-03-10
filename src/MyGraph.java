@@ -117,20 +117,58 @@ public class MyGraph {
         return null;
     }
 
-    //Currently Working On
+
     public int outDegree(String vertex){
         Vertex v = getVertexfromString(vertex);
+        int num = 0;
 
         ArrayList<GraphPairing> gps = graph.get(v);
         for (GraphPairing g: gps){
-
+            if (g.getVertex() != null){
+                num++;
+            }
         }
-        return 0;
+        return num;
+    }
+
+    public int inDegree(String vertex){
+        Vertex v = getVertexfromString(vertex);
+        int num = 0;
+
+        ArrayList<GraphPairing> gps = graph.get(v);
+        for (GraphPairing g: gps){
+            if (g.getVertex() != null){
+                num++;
+            }
+        }
+        return num;
     }
 
     //Skipping for now
     public Set<String> vertecies(){
         return null;
+    }
+
+    public ArrayList<Edge> outgoingEdges(String vertex){
+        Vertex v = getVertexfromString(vertex);
+
+        ArrayList<GraphPairing> gps = graph.get(v);
+        ArrayList<Edge> edges = new ArrayList<>();
+        for (GraphPairing g: gps){
+                edges.add(g.getEdge());
+        }
+        return edges;
+    }
+
+    public ArrayList<Edge> incomingEdges(String vertex){
+        Vertex v = getVertexfromString(vertex);
+
+        ArrayList<GraphPairing> gps = graph.get(v);
+        ArrayList<Edge> edges = new ArrayList<>();
+        for (GraphPairing g: gps){
+            edges.add(g.getEdge());
+        }
+        return edges;
     }
 
     public String[] endVertices(String edge){
@@ -143,6 +181,7 @@ public class MyGraph {
             ArrayList<GraphPairing> gps = graph.get(v);
             for (GraphPairing g : gps){
                 if (g.getEdge() == e){
+                    if(g.getVertex() != null)
                      string.add(g.getVertex().getName());
                 }
             }
@@ -151,5 +190,22 @@ public class MyGraph {
              vertices[i] = string.get(i);
 
         return vertices;
+    }
+
+    //kinda broken returns null for vertex but edges don't delete
+    public void removeVertex(String vertex){
+        Vertex v = getVertexfromString(vertex);
+        graph.remove(v);
+
+        for (Vertex vert: vertices()){
+            ArrayList<GraphPairing> gps = graph.get(v);
+            for (GraphPairing g: gps){
+                if(g.getVertex() == vert){
+                    graph.remove(vert);
+                }
+            }
+        }
+
+        System.out.println("Vertex " + vertex + " was deleted");
     }
 }
