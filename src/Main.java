@@ -52,7 +52,7 @@ public class Main {
         System.out.println("In Degree of G is " + g.inDegree("G"));
         System.out.println("Outgoing Edge(s) from F: " + g.outgoingEdges("F"));
         System.out.println("Incoming Edge(s) from I: " + g.incomingEdges("I"));
-
+        System.out.println("🗿");
     }
 
 }

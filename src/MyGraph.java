@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.Stack;
 
 public class MyGraph {
     private int numVerticies;
@@ -144,10 +145,6 @@ public class MyGraph {
         return num;
     }
 
-    //Skipping for now
-    public Set<String> vertecies(){
-        return null;
-    }
 
     public ArrayList<Edge> outgoingEdges(String vertex){
         Vertex v = getVertexfromString(vertex);
@@ -192,20 +189,51 @@ public class MyGraph {
         return vertices;
     }
 
-    //kinda broken returns null for vertex but edges don't delete
-    public void removeVertex(String vertex){
-        Vertex v = getVertexfromString(vertex);
-        graph.remove(v);
-
-        for (Vertex vert: vertices()){
+    public void removeEdge(String edge) {
+        Edge e = getEdgefromString(edge);
+        Set<Vertex> vertices = vertices();
+        for (Vertex v: vertices) {
             ArrayList<GraphPairing> gps = graph.get(v);
-            for (GraphPairing g: gps){
-                if(g.getVertex() == v){
-                    graph.remove(vert);
+
+            for (int i = 0; i < gps.size(); i++) {
+                GraphPairing g = gps.get(i);
+                if (g.getEdge().equals(e)) {
+                    gps.remove(g);
+                    i--;
                 }
             }
         }
-
-        System.out.println("Vertex " + vertex + " was deleted");
+        System.out.println("Edge " + edge + " has been removed");
     }
+
+
+    public void removeVertex(String vertex) {
+        Vertex v = getVertexfromString(vertex);
+        Set<Vertex> vertices = vertices();
+        graph.remove(v);
+        System.out.println("Vertex " + vertex + " has been removed");
+
+        for (Vertex vert: vertices) {
+            ArrayList<GraphPairing> gps = graph.get(vert);
+            for (int i = 0; i < gps.size(); i++) {
+                GraphPairing g = gps.get(i);
+                if (g.getVertex().equals(vert)) {
+                    gps.remove(g);
+                    i--;
+                    System.out.println("Edge " + g + " has been removed");
+                }
+            }
+        }
+    }
+
+    public void breadthFirstSearch(String start){
+        Vertex v = getVertexfromString(start);
+        Stack<Vertex> vertexFinder = new Stack<>();
+        ArrayList<Vertex> vertexVisited = new ArrayList<>();
+        ArrayList<GraphPairing> gps = graph.get(v);
+
+
+    }
+
+
 }
